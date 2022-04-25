@@ -1,9 +1,19 @@
 package com.wiredbrain.friends.model;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Embeddable
+//@Embeddable
+
+//now the address is a real entity
+@Entity
 public class Address {
+  @Id
+  @GeneratedValue(strategy= GenerationType.AUTO)
+  private int id;
   private String street;
   private String city;
 

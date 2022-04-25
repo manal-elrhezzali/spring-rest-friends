@@ -2,11 +2,14 @@ package com.wiredbrain.friends.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Friend {
@@ -21,16 +24,27 @@ public class Friend {
   @JsonIgnore
   boolean married;
 
-  @Embedded
-  Address address;
+  @OneToMany(cascade = CascadeType.ALL)
+  List<Address> addresses;
 
-  public Address getAddress() {
-    return address;
+  public List<Address> getAddresses() {
+    return addresses;
   }
 
-  public void setAddress(Address address) {
-    this.address = address;
+  public void setAddresses(List<Address> addresses) {
+    this.addresses = addresses;
   }
+
+//  @Embedded
+//  Address address;
+
+//  public Address getAddress() {
+//    return address;
+//  }
+//
+//  public void setAddress(Address address) {
+//    this.address = address;
+//  }
 
   public int getAge() {
     return age;
