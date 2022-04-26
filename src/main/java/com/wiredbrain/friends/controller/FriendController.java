@@ -3,11 +3,17 @@ package com.wiredbrain.friends.controller;
 import com.wiredbrain.friends.model.Friend;
 import com.wiredbrain.friends.service.FriendService;
 import com.wiredbrain.friends.util.ErrorMessage;
+import com.wiredbrain.friends.util.FieldErrorMessage;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +32,8 @@ public class FriendController {
   FriendService friendService;
 
   @PostMapping("/friend")
-  public Friend create(@RequestBody Friend friend) throws ValidationException {
-    if(friend.getId() == 0 && friend.getFirstName() != null && friend.getLastName() != null)
+  public Friend create(@Valid @RequestBody Friend friend) {
       return friendService.save(friend);
-    else throw new ValidationException("friend cannot be created");
   }
 
   //this returns a text "friend cannot be created",
@@ -38,6 +42,17 @@ public class FriendController {
 //  ResponseEntity<String> exceptionHandler(ValidationException e) {
 //    return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
 //  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  List<FieldErrorMessage> exceptionHandler(MethodArgumentNotValidException e) {
+    List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+    List<FieldErrorMessage> fieldErrorMessages = fieldErrors.stream().map(
+            fieldError -> new FieldErrorMessage(fieldError.getField(), fieldError.getDefaultMessage()))
+        .collect(
+            Collectors.toList());
+    return fieldErrorMessages;
+  }
 
   //returning a JSON text error message
   @ResponseStatus(HttpStatus.BAD_REQUEST)
