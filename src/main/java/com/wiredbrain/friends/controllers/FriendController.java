@@ -1,7 +1,7 @@
-package com.wiredbrain.friends.controller;
+package com.wiredbrain.friends.controllers;
 
-import com.wiredbrain.friends.model.Friend;
-import com.wiredbrain.friends.service.FriendService;
+import com.wiredbrain.friends.models.Friend;
+import com.wiredbrain.friends.services.FriendService;
 import com.wiredbrain.friends.util.ErrorMessage;
 import com.wiredbrain.friends.util.FieldErrorMessage;
 import java.util.List;
@@ -70,7 +70,7 @@ public class FriendController {
   }
 
   @GetMapping("/friend")
-  Iterable<Friend> read() {
+  public Iterable<Friend> read() {
     return friendService.findAll();
   }
 

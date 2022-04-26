@@ -1,10 +1,9 @@
-package com.wiredbrain.friends.model;
+package com.wiredbrain.friends.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,6 +46,15 @@ public class Friend {
 //  public void setAddress(Address address) {
 //    this.address = address;
 //  }
+
+
+  public Friend() {
+  }
+
+  public Friend(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
   public int getAge() {
     return age;

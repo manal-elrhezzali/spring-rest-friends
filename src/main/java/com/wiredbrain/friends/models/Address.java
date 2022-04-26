@@ -1,6 +1,5 @@
-package com.wiredbrain.friends.model;
+package com.wiredbrain.friends.models;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
