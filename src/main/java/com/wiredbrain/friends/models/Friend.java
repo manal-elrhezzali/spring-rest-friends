@@ -3,6 +3,7 @@ package com.wiredbrain.friends.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,24 +18,38 @@ public class Friend {
   @GeneratedValue(strategy= GenerationType.AUTO)
   private int id;
   @NotBlank
-  @JsonProperty("first-name")
+//  @JsonProperty("first-name")
   private String firstName;
-  @JsonProperty("last-name")
+//  @JsonProperty("last-name")
   private String lastName;
-  int age;
-  @JsonIgnore
-  boolean married;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  List<Address> addresses;
+  //mapped by friend from the other side
+  @OneToMany(mappedBy= "friend", cascade = CascadeType.ALL)
+  private Set<Address> addresses;
 
-  public List<Address> getAddresses() {
+  public Set<Address> getAddresses() {
     return addresses;
   }
 
-  public void setAddresses(List<Address> addresses) {
+  public void setAddresses(Set<Address> addresses) {
     this.addresses = addresses;
   }
+
+
+//  int age;
+//  @JsonIgnore
+//  boolean married;
+
+//  @OneToMany(cascade = CascadeType.ALL)
+//  List<Address> addresses;
+//
+//  public List<Address> getAddresses() {
+//    return addresses;
+//  }
+//
+//  public void setAddresses(List<Address> addresses) {
+//    this.addresses = addresses;
+//  }
 
 //  @Embedded
 //  Address address;
@@ -56,21 +71,21 @@ public class Friend {
     this.lastName = lastName;
   }
 
-  public int getAge() {
-    return age;
-  }
-
-  public void setAge(int age) {
-    this.age = age;
-  }
-
-  public boolean isMarried() {
-    return married;
-  }
-
-  public void setMarried(boolean married) {
-    this.married = married;
-  }
+//  public int getAge() {
+//    return age;
+//  }
+//
+//  public void setAge(int age) {
+//    this.age = age;
+//  }
+//
+//  public boolean isMarried() {
+//    return married;
+//  }
+//
+//  public void setMarried(boolean married) {
+//    this.married = married;
+//  }
 
   public int getId() {
     return id;

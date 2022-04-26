@@ -1,6 +1,7 @@
 package com.wiredbrain.friends.controllers;
 
 import com.wiredbrain.friends.models.Friend;
+import javax.xml.bind.ValidationException;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,6 @@ public class IntegrationTests {
 
     friendController.delete(friendResult.getId());
     Assertions.assertThat(friendController.read()).isEmpty();
-
   }
+
 }
