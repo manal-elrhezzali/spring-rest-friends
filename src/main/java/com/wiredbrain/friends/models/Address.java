@@ -1,5 +1,6 @@
 package com.wiredbrain.friends.models;
 
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,16 +20,24 @@ public class Address {
   private String city;
 
   //friend back reference
-  @ManyToOne
-  private Friend friend;
+  @ManyToMany
+  private Set<Friend> friends;
 
-  public Friend getFriend() {
-    return friend;
+  public Set<Friend> getFriends() {
+    return friends;
   }
 
-  public void setFriend(Friend friend) {
-    this.friend = friend;
+  public void setFriends(Set<Friend> friends) {
+    this.friends = friends;
   }
+
+  //  public Friend getFriend() {
+//    return friend;
+//  }
+//
+//  public void setFriend(Friend friend) {
+//    this.friend = friend;
+//  }
 
   public String getStreet() {
     return street;

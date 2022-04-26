@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
@@ -24,7 +25,7 @@ public class Friend {
   private String lastName;
 
   //mapped by friend from the other side
-  @OneToMany(mappedBy= "friend", cascade = CascadeType.ALL)
+  @ManyToMany(mappedBy= "friends")
   private Set<Address> addresses;
 
   public Set<Address> getAddresses() {
@@ -35,6 +36,13 @@ public class Friend {
     this.addresses = addresses;
   }
 
+  public Friend() {
+  }
+
+  public Friend(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
 //  int age;
 //  @JsonIgnore
@@ -61,15 +69,6 @@ public class Friend {
 //  public void setAddress(Address address) {
 //    this.address = address;
 //  }
-
-
-  public Friend() {
-  }
-
-  public Friend(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
 
 //  public int getAge() {
 //    return age;
